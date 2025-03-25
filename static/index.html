@@ -230,7 +230,7 @@
     
     <script>
         // Configuration
-        const API_BASE_URL = 'http://localhost:8000';
+        const API_BASE_URL = window.location.origin;
         let isRecording = false;
         let recognition = null;
         
@@ -284,7 +284,7 @@
         
         // Functions
         function checkAPIStatus() {
-            fetch(`${API_BASE_URL}/status`)
+            fetch(`${API_BASE_URL}/api/status`)
                 .then(response => response.json())
                 .then(data => {
                     if (data.api_status === 'active' && data.kb_status === 'active') {
@@ -314,7 +314,7 @@
             const tempMessageDiv = addMessageToChat('<div class="loading"></div>', 'assistant');
             
             // Make API call
-            fetch(`${API_BASE_URL}/query?q=${encodeURIComponent(userText)}`)
+            fetch(`${API_BASE_URL}/api/query?q=${encodeURIComponent(userText)}`)
                 .then(response => {
                     if (!response.ok) {
                         throw new Error('Network response was not ok');
